@@ -15,9 +15,13 @@ export class App extends Component {
         `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKeyOc}`
       );
       let weatherResponse = await axios.get(
-        `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
       );
-      debugger;
+      let weatherInfo = {
+        city: locationResponse.data.results[0].components.postal_city,
+        temp: weatherResponse.data.main.temp,
+      };
+      this.setState({ location: weatherInfo });
     });
   }
 
