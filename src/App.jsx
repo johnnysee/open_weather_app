@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 export class App extends Component {
   state = {
-    geolocation: {},
+    location: {},
   };
 
   componentDidMount() {
@@ -22,7 +22,6 @@ export class App extends Component {
         temp: weatherResponse.data.main.temp,
       };
       this.setState({ location: weatherInfo });
-      debugger;
     });
   }
 
@@ -30,6 +29,8 @@ export class App extends Component {
     return (
       <div>
         <h1>Hello</h1>
+        <p>{this.state.location.city}</p>
+        <p>{this.state.location.temp}</p>
       </div>
     );
   }
