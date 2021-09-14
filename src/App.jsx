@@ -27,10 +27,10 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <div data-cy="weather-display">
         <h1>Hello</h1>
-        <p>{this.state.location.city}</p>
-        <p>{this.state.location.temp}</p>
+        <p data-cy="location">{this.state.location.city}</p>
+        <p data-cy="temp">{this.state.location.temp}°C</p>
       </div>
     );
   }
