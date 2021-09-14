@@ -22,6 +22,7 @@ export class App extends Component {
         temp: weatherResponse.data.main.temp,
       };
       this.setState({ location: weatherInfo });
+      debugger;
     });
   }
 
