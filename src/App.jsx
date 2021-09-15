@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import { Container } from "semantic-ui-react";
 
 export class App extends Component {
   state = {
@@ -29,11 +30,11 @@ export class App extends Component {
 
   render() {
     return (
-      <div data-cy="weather-display">
+      <Container data-cy="weather-display">
         <h1>Hello</h1>
         <p data-cy="location">{this.state.location.city}</p>
         <p data-cy="temp">{this.state.location.temp}°C</p>
-      </div>
+      </Container>
     );
   }
 }

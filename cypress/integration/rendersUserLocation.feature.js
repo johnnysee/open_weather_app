@@ -28,4 +28,7 @@ describe("weather info for user's location", () => {
       cy.get("[data-cy=location]").should("contain", "Virum");
     });
   });
+  it("is expected to display a country's flag", () => {
+    cy.get("[data-cy=weather-country").should("contain", "DK");
+  });
 });
