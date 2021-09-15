@@ -26,7 +26,7 @@ export class App extends Component {
         country: weatherResponse.data.sys.country.toLowerCase(),
       };
       this.setState({ location: weatherInfo });
-    });
+    }, console.log("Error was called!"));
   }
 
   render() {
