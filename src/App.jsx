@@ -9,8 +9,8 @@ export class App extends Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       let { latitude, longitude } = position.coords;
-      let apiKeyOc = "40200b4156ae4d36ba26a96d811d8560";
-      let apiKeyOw = "ad34bf60b6f7739d2a7e1cd9cd4bb854";
+      let apiKeyOc = process.env.REACT_APP_LOCATION_API_KEY;
+      let apiKeyOw = process.env.REACT_APP_WEATHER_API_KEY;
       let locationResponse = await axios.get(
         `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKeyOc}`
       );
