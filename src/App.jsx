@@ -8,25 +8,30 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      let { latitude, longitude } = position.coords;
-      let apiKeyOc = process.env.REACT_APP_LOCATION_API_KEY;
-      let apiKeyOw = process.env.REACT_APP_WEATHER_API_KEY;
-      let locationResponse = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKeyOc}`
-      );
-      let weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
-      );
-      let weatherInfo = {
-        city: locationResponse.data.results[0].components.postal_city
-          ? locationResponse.data.results[0].components.postal_city
-          : locationResponse.data.results[0].components.city,
-        temp: weatherResponse.data.main.temp,
-        country: weatherResponse.data.sys.country.toLowerCase(),
-      };
-      this.setState({ location: weatherInfo });
-    }, console.log("Error was called!"));
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        let { latitude, longitude } = position.coords;
+        let apiKeyOc = process.env.REACT_APP_LOCATION_API_KEY;
+        let apiKeyOw = process.env.REACT_APP_WEATHER_API_KEY;
+        let locationResponse = await axios.get(
+          `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKeyOc}`
+        );
+        let weatherResponse = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
+        );
+        let weatherInfo = {
+          city: locationResponse.data.results[0].components.postal_city
+            ? locationResponse.data.results[0].components.postal_city
+            : locationResponse.data.results[0].components.city,
+          temp: weatherResponse.data.main.temp,
+          country: weatherResponse.data.sys.country.toLowerCase(),
+        };
+        this.setState({ location: weatherInfo });
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
   }
 
   render() {
