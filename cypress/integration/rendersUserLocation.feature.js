@@ -31,7 +31,7 @@ describe("weather info for user's location", () => {
   it("is expected to display a country's flag", () => {
     cy.get("[data-cy=weather-country]").should("have.attr", "class", "dk flag");
   });
-  it('is expected to display country name', () => {
-    cy.get("[data-cy=weather-country]").should('contain', 'Denmark')
+  it("is expected to display country name", () => {
+    cy.get("[data-cy=country-name]").should("contain", "Denmark");
   });
 });

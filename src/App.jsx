@@ -25,6 +25,7 @@ export class App extends Component {
             : locationResponse.data.results[0].components.city,
           temp: weatherResponse.data.main.temp,
           country: weatherResponse.data.sys.country.toLowerCase(),
+          countryName: locationResponse.data.results[0].components.country,
         };
         this.setState({ location: weatherInfo });
       },
@@ -43,12 +44,14 @@ export class App extends Component {
           <p data-cy="temp">
             The temperature right now is: {this.state.location.temp}°C
           </p>
-          <p>
-            You are in country: &nbsp;
+          <p data-cy="country-name">
+            You are in &nbsp;
+            {this.state.location.countryName}
+            &nbsp;
             <Flag
               data-cy="weather-country"
               name={this.state.location.country}
-            />{" "}
+            />
           </p>
         </Segment>
       </Container>
