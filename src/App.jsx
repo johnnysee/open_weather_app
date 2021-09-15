@@ -7,18 +7,29 @@ export class App extends Component {
     weatherInfo: {},
   };
 
+  async locationCall(latitude, longitude) {
+    let apiKeyOc = process.env.REACT_APP_LOCATION_API_KEY;
+    let locationResponse = await axios.get(
+      `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKeyOc}`
+    );
+    return locationResponse;
+  }
+
+  async weatherCall(latitude, longitude) {
+    let apiKeyOw = process.env.REACT_APP_WEATHER_API_KEY;
+    let weatherResponse = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
+    );
+    return weatherResponse;
+  }
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         let { latitude, longitude } = position.coords;
-        let apiKeyOc = process.env.REACT_APP_LOCATION_API_KEY;
-        let apiKeyOw = process.env.REACT_APP_WEATHER_API_KEY;
-        let locationResponse = await axios.get(
-          `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKeyOc}`
-        );
-        let weatherResponse = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
-        );
+        let locationResponse, weatherResponse;
+        locationResponse = await this.locationCall(latitude, longitude);
+        weatherResponse = await this.weatherCall(latitude, longitude);
         let weatherInfo = {
           city: locationResponse.data.results[0].components.postal_city
             ? locationResponse.data.results[0].components.postal_city
@@ -28,7 +39,6 @@ export class App extends Component {
           countryName: locationResponse.data.results[0].components.country,
         };
         this.setState({ weatherInfo });
-        debugger;
       },
       (error) => {
         alert(error.message);
