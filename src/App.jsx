@@ -4,7 +4,7 @@ import { Container, Segment, Flag, Header } from "semantic-ui-react";
 
 export class App extends Component {
   state = {
-    location: {},
+    weatherInfo: {},
   };
 
   componentDidMount() {
@@ -27,7 +27,8 @@ export class App extends Component {
           country: weatherResponse.data.sys.country.toLowerCase(),
           countryName: locationResponse.data.results[0].components.country,
         };
-        this.setState({ location: weatherInfo });
+        this.setState({ weatherInfo });
+        debugger;
       },
       (error) => {
         alert(error.message);
@@ -40,17 +41,19 @@ export class App extends Component {
       <Container data-cy="weather-display">
         <Header size="huge">Weather App</Header>
         <Segment>
-          <p data-cy="location">You are in city: {this.state.location.city}</p>
+          <p data-cy="location">
+            You are in city: {this.state.weatherInfo.city}
+          </p>
           <p data-cy="temp">
-            The temperature right now is: {this.state.location.temp}°C
+            The temperature right now is: {this.state.weatherInfo.temp}°C
           </p>
           <p data-cy="country-name">
             You are in &nbsp;
-            {this.state.location.countryName}
+            {this.state.weatherInfo.countryName}
             &nbsp;
             <Flag
               data-cy="weather-country"
-              name={this.state.location.country}
+              name={this.state.weatherInfo.country}
             />
           </p>
         </Segment>
