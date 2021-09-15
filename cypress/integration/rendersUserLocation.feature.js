@@ -7,7 +7,7 @@ describe("weather info for user's location", () => {
       fixture: "location_response.json",
     });
   });
-  it("is expected to be ", () => {
+  it("is expected to be displayed on initial render", () => {
     cy.visit("/", {
       onBeforeLoad(window) {
         const stubLocation = {
@@ -29,6 +29,6 @@ describe("weather info for user's location", () => {
     });
   });
   it("is expected to display a country's flag", () => {
-    cy.get("[data-cy=weather-country").should("contain", "DK");
+    cy.get("[data-cy=weather-country]").should("contain", "DK");
   });
 });

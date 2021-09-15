@@ -23,6 +23,7 @@ export class App extends Component {
           ? locationResponse.data.results[0].components.postal_city
           : locationResponse.data.results[0].components.city,
         temp: weatherResponse.data.main.temp,
+        country: weatherResponse.data.sys.country,
       };
       this.setState({ location: weatherInfo });
     });
@@ -34,6 +35,7 @@ export class App extends Component {
         <h1>Hello</h1>
         <p data-cy="location">{this.state.location.city}</p>
         <p data-cy="temp">{this.state.location.temp}°C</p>
+        <div data-cy="weather-country">{this.state.location.country}</div>
       </Container>
     );
   }
