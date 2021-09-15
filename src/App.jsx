@@ -39,7 +39,7 @@ export class App extends Component {
       <Container data-cy="weather-display">
         <Header size="huge">Weather App</Header>
         <Segment>
-          <p data-cy="location">You are in city {this.state.location.city}</p>
+          <p data-cy="location">You are in city: {this.state.location.city}</p>
           <p data-cy="temp">
             The temperature right now is: {this.state.location.temp}°C
           </p>
