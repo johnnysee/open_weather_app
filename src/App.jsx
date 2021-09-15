@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Container } from "semantic-ui-react";
+import { Container, Segment, Flag, Header } from "semantic-ui-react";
 
 export class App extends Component {
   state = {
@@ -23,7 +23,7 @@ export class App extends Component {
           ? locationResponse.data.results[0].components.postal_city
           : locationResponse.data.results[0].components.city,
         temp: weatherResponse.data.main.temp,
-        country: weatherResponse.data.sys.country,
+        country: weatherResponse.data.sys.country.toLowerCase(),
       };
       this.setState({ location: weatherInfo });
     });
@@ -32,10 +32,20 @@ export class App extends Component {
   render() {
     return (
       <Container data-cy="weather-display">
-        <h1>Hello</h1>
-        <p data-cy="location">{this.state.location.city}</p>
-        <p data-cy="temp">{this.state.location.temp}°C</p>
-        <div data-cy="weather-country">{this.state.location.country}</div>
+        <Header size="huge">Weather App</Header>
+        <Segment>
+          <p data-cy="location">You are in city {this.state.location.city}</p>
+          <p data-cy="temp">
+            The temperature right now is: {this.state.location.temp}°C
+          </p>
+          <p>
+            You are in country: &nbsp;
+            <Flag
+              data-cy="weather-country"
+              name={this.state.location.country}
+            />{" "}
+          </p>
+        </Segment>
       </Container>
     );
   }
