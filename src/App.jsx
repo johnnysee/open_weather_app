@@ -18,7 +18,9 @@ export class App extends Component {
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKeyOw}`
       );
       let weatherInfo = {
-        city: locationResponse.data.results[0].components.postal_city,
+        city: locationResponse.data.results[0].components.postal_city
+          ? locationResponse.data.results[0].components.postal_city
+          : locationResponse.data.results[0].components.city,
         temp: weatherResponse.data.main.temp,
       };
       this.setState({ location: weatherInfo });
