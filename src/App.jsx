@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Container, Segment, Flag, Header } from "semantic-ui-react";
 import { Line } from "react-chartjs-2"
+import LineChart from "./LineChart";
 
-export class App extends Component {
+class App extends Component {
   state = {
+    coords: null,
     weatherInfo: {},
   };
 
@@ -39,7 +41,8 @@ export class App extends Component {
           country: weatherResponse.data.sys.country.toLowerCase(),
           countryName: locationResponse.data.results[0].components.country,
         };
-        this.setState({ weatherInfo });
+        debugger
+        this.setState({ weatherInfo: weatherInfo});
       },
       (error) => {
         alert(error.message);
@@ -48,6 +51,20 @@ export class App extends Component {
   }
 
   render() {
+    // const { weatherInfo, dailyTemp } = this.state;
+    // let labels = [];
+    // let dataItems = [];
+    // let data;
+    // if (dailyTemp) {
+    //   dailyTemp.forEach((day)) => {
+    //     labels.push(new Date(day.dt * 1000).toLocaleDateString())
+    //     dataItems.push(day.temp.day);
+    //   });
+    //   data = {
+    //     labels: labels,
+    //     datasets: [{ labels: "Daily Temp", data: dataItems}],
+    //   };
+    // } 
     return (
       <Container data-cy="weather-display">
         <Header size="huge">Weather App</Header>
@@ -67,6 +84,8 @@ export class App extends Component {
               name={this.state.weatherInfo.country}
             />
           </p>
+          <LineChart />
+          {/* <Line data={data} options={options} /> */}
         </Segment>
       </Container>
     );
