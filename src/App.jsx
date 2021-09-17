@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Container, Segment, Flag, Header } from "semantic-ui-react";
+import { Line } from "react-chartjs-2"
 
 export class App extends Component {
   state = {
