@@ -2,6 +2,8 @@
 
 Team: Max Anderson and Johnny See
 
+Deployed via Netlify: https://johmax-weather.netlify.app/
+
 ## The Code
 
 This is a Weather App that reads in the location data of the user, calls two APIs and returns a webpage with user's location, the current temperature in Celius and country's flag.
